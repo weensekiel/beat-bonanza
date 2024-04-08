@@ -1,0 +1,21 @@
+.login {
+
+    &__title {
+        display: flex;
+        justify-content: center;
+
+    }
+
+    &__form {
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+    }
+}
