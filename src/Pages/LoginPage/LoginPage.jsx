@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export function LoginPage() {
     return (
-        <main>
+        <main className="login">
             <h1 className="login__title">Beat Bonanza</h1>
             <h2 className="login__title">Login</h2>
             <form className="login__form">
@@ -12,7 +12,9 @@ export function LoginPage() {
 
                 <label htmlFor="password">Password: </label>
                 <input type="password" placeholder="password" />
-                <button>Login</button>
+                <Link to="/game">
+                    <button className="login__button">Login</button>
+                </Link>
             </form>
             <Link to="/register">
                 <p className="login__footer">Don't have an account? Register here</p>

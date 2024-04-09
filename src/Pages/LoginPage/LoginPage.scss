@@ -1,21 +1,35 @@
 .login {
+    color: #ee82ee;
 
     &__title {
         display: flex;
         justify-content: center;
-
     }
 
-    &__form {
-        border: 1px solid red;
+    &__form {   
         display: flex;
-        justify-content: center;
         align-items: center;
         flex-direction: column;
+        gap: 10px;
+        margin: auto;
+        width: 30%;
+        background-color: #ee82ee;
+        color: #014061;
+        border-radius: 4px;
     }
 
     &__footer {
         display: flex;
         justify-content: center;
+        color: #ee82ee;
+        text-decoration: none;
+    }
+
+    &__button {
+        background-color: #014061;
+        color: #ee82ee;
+        border-radius: 4px;
+        width: 100px;
+        height: 30px;
     }
 }

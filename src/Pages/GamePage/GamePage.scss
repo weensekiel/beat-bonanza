@@ -1,157 +1,38 @@
-  .container {
-    width: 50vh;
-    max-width: 100vw;
-    height: 100vh;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: clamp(10px, 5vw, 50px);
-  }
-  
-  .lane {
-    background-color: rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow-y: hidden;
-  }
-  
-  @keyframes fall {
-    0% {
-      transform: translateY(-100%);
-      top: 0;
-    }
-    100% {
-      transform: translateY(0);
-      top: 100%;
-    }
-  }
-  
-  .arrow {
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 20%;
-    position: absolute;
-    box-shadow: 0 -3px 7px 2px rgba(0, 0, 0, 0.3);
-    border: 3px solid rgba(0, 0, 0, 0.5);
-    animation-duration: var(--animation-speed);
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    z-index: 2;
-  }
-  
-  .arrow:after {
-    background-image: url("./src/arrow.svg");
-    background-size: 80% 80%;
-    background-repeat: no-repeat;
-    background-position: center;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-  }
-  
-  .left .arrow {
-    background-color: #0fc0fc;
-  }
-  .up .arrow {
-    background-color: #7b1daf;
-  }
-  .down .arrow {
-    background-color: #ff2fb9;
-  }
-  .right .arrow {
-    background-color: #d4ff47;
-  }
-  
-  .left .arrow:after {
-    transform: rotate(-90deg);
-  }
-  .right .arrow:after {
-    transform: rotate(90deg);
-  }
-  .down .arrow:after {
-    transform: rotate(-180deg);
-  }
-  
-  .points,
-  .lives {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    padding: 15px;
-    color: #ff2fb9;
-    background-color: #162b3a;
-    font-weight: bold;
-    font-size: 40px;
-    z-index: 3;
-  }
-  
-  .lives {
-    left: 15px;
-    right: auto;
-  }
-  
-  .score-zone {
-    width: 100%;
-    aspect-ratio: 0.3;
-    background-color: #7b1daf;
-    opacity: 0.5;
+.game {
+
+  &__totals {
     display: flex;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    transition: opacity 80ms ease-in-out;
+    justify-content: space-between;
+    color: #ee82ee;
+    font-size: 2rem;
+    padding: 1rem;
+    border: 1px solid red;
   }
-  .score-zone.active {
-    opacity: 1;
-  }
-  
-  .sweet-spot {
-    width: 100%;
-    aspect-ratio: 0.8;
-    background-color: #d4ff47;
-  }
-  
-  .modal {
-    background-color: rgba(0, 0, 0, 0.6);
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    z-index: 4;
+
+
+  &__play {
+    background-color: gray;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    &--left-col {
+      transform: rotate(270deg);
+      height: 100%;
+    }
+    &--up-col {
+      height: 100%;
+    }
+    &--down-col {
+      transform: rotate(180deg);
+      height: 100%;
+    }
+    &--right-col {
+      transform: rotate(90deg);
+      height: 100%;
+    }
   }
-  
-  .modal p {
-    font-size: 5vw;
-    line-height: 1;
-    margin: 0;
-    font-weight: bold;
-    color: #ff2fb9;
-  }
-  
-  .modal button {
-    font-size: 3vw;
-    background-color: #ff2fb9;
-    border: 2px solid #ff2fb9;
-    border-radius: 20px;
-    padding: 10px 50px;
-    margin-top: 50px;
-    cursor: pointer;
-    color: #fff;
-    transition: border 0.2s ease-in-out;
-  }
-  
-  .modal button:hover {
-    border: 2px solid #fff;
-  }
-  
-  .modal.hidden {
-    display: none;
-  }
-  
+
+
+}

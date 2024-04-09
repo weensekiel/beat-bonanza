@@ -19,7 +19,9 @@ export function RegisterPage() {
                 <label htmlFor="confirmPassword">Confirm Password: </label>
                 <input type="password" placeholder="confirm password" />
 
-                <button>Register</button>
+                <Link to="/login">
+                    <button className="register__button">Register</button>
+                </Link>
             </form>
             <Link to="/login">
                 <p className="register__footer">Already have an account? Login here</p>
