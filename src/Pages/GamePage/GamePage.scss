@@ -6,33 +6,38 @@
     color: #ee82ee;
     font-size: 2rem;
     padding: 1rem;
-    border: 1px solid red;
   }
 
-
   &__play {
-    background-color: gray;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 
+    &--generator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
     &--left-col {
       transform: rotate(270deg);
       height: 100%;
     }
+
     &--up-col {
       height: 100%;
     }
+
     &--down-col {
       transform: rotate(180deg);
       height: 100%;
     }
+
     &--right-col {
       transform: rotate(90deg);
       height: 100%;
     }
   }
-
-
 }
