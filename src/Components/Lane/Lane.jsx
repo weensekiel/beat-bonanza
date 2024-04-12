@@ -1,3 +1,4 @@
+import "./Lane.scss";
 import { ScoreZone } from "../ScoreZone/ScoreZone";
 import arrowUp from "../../assets/arrow-up.svg";
 import arrowDown from "../../assets/arrow-down.svg";

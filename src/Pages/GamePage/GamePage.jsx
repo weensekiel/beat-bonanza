@@ -9,7 +9,7 @@ export function GamePage() {
     const [lives, setLives] = useState(10);
     const [multiplier, setMultiplier] = useState(1);
     const [isGameRunning, setIsGameRunning] = useState(false);
-    const [isGameOver, setIsGameOver] = useState(false);
+    const [finalScore, setFinalScore] = useState(0);
     const [play, { stop }] = useSound(song);
     const gameContainerRef = useRef(null);
 
@@ -36,31 +36,31 @@ export function GamePage() {
 
     useEffect(() => {
         let intervalId;
-    
+
         if (isGameRunning) {
             intervalId = setInterval(() => {
                 startArrowsAnimation();
-            }, 385); 
+            }, 385);
             play();
         } else {
             stopArrowsAnimation();
+            setLives(10);
             stop();
         }
-    
+
         document.addEventListener('keydown', handleKeyDown);
-    
+
         return () => {
-            clearInterval(intervalId); 
+            clearInterval(intervalId);
             document.removeEventListener('keydown', handleKeyDown);
         };
     }, [isGameRunning, play, stop]);
 
     useEffect(() => {
         if (lives === 0) {
-            setIsGameOver(true);
             setIsGameRunning(false);
-            stop();
             stopArrowsAnimation();
+            stop();
         }
     }, [lives, stop]);
 
@@ -69,12 +69,12 @@ export function GamePage() {
 
         const numLanes = Math.random() > 0.5 ? 1 : 2;
         const chosenLanes = getRandomLanes(numLanes, lanes);
-    
+
         chosenLanes.forEach(lane => {
             const arrow = document.createElement('div');
             arrow.classList.add('arrow');
             lane.appendChild(arrow);
-    
+
             setTimeout(() => {
                 if (lane.contains(arrow)) {
                     lane.removeChild(arrow);
@@ -92,7 +92,7 @@ export function GamePage() {
         const shuffledLanes = Array.from(lanes).sort(() => Math.random() - 0.5);
         return shuffledLanes.slice(0, numLanes);
     }
-    
+
     function stopArrowsAnimation() {
         const arrows = gameContainerRef.current.querySelectorAll('.arrow');
         arrows.forEach(arrow => arrow.remove());
@@ -107,35 +107,35 @@ export function GamePage() {
 
     function handleKeyDown(event) {
         if (!isGameRunning) return;
-    
+
         const lane = lanes[event.key];
-    
+
         if (lane) {
             const arrow = lane.querySelector(".arrow");
             if (arrow) {
                 const scoreZone = lane.querySelector(".score-zone");
-    
+
                 if (overlaps(arrow, scoreZone)) {
                     const sweetSpot = lane.querySelector(".sweet-spot");
                     if (overlaps(arrow, sweetSpot)) {
-                        setScore(score + 150);
+                        setScore(prevScore => prevScore + 150); 
                     } else {
-                        setScore(score + 100);
+                        setScore(prevScore => prevScore + 100);
                     }
                     lane.removeChild(arrow);
                 } else {
                     setLives(prevLives => prevLives - 1);
                     if (lives <= 0) {
                         setIsGameRunning(false);
-                        
                         stop();
+                        setFinalScore(score);
                     }
                 }
-    
+
                 updateLivesAndScores();
             }
         }
-    }
+    };
 
     function overlaps(el1, el2) {
         const domRect1 = el1.getBoundingClientRect();
@@ -164,20 +164,20 @@ export function GamePage() {
     return (
         <div>
             <div className='game__totals'>
-                <div>
+                <div className='game__totals--lives'>
                     Lives: {lives}
                 </div>
 
-                <div>
+                <div className='game__totals--score'>
                     Score: {score}
                 </div>
 
-                <div>
+                <div className='game__totals--multiplier'>
                     Multiplier: {multiplier}x
                 </div>
             </div>
 
-            <div ref={gameContainerRef} className="container" style={{ '--animation-speed': '4.5s' }}>
+            <div ref={gameContainerRef} className="game__board--container" style={{ '--animation-speed': '4.5s' }}>
                 <Lane direction="left" />
                 <Lane direction="down" />
                 <Lane direction="up" />
@@ -186,6 +186,7 @@ export function GamePage() {
 
             {!isGameRunning && (
                 <div className="modal">
+                    <p>Score: {score}</p>
                     <button className="start" onClick={handleStart}>
                         Play!
                     </button>

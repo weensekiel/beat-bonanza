@@ -1,0 +1,17 @@
+.lane {
+    background-color: rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow-y: hidden;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100%);
+        top: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        top: 100%;
+    }
+}
