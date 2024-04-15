@@ -35,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard/user/:id" element={<Dashboard user={user} />} />
+        <Route path="/dashboard/user/:id" element={<Dashboard />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/game" element={<GamePage />} />
         <Route path="/results" element={<ResultsPage />} />

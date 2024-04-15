@@ -83,9 +83,6 @@
   transform: rotate(-180deg);
 }
 
-
-
-
 .score-zone {
   width: 100%;
   aspect-ratio: 0.8;
@@ -94,7 +91,7 @@
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: 10%;
+  bottom: 20%;
   transition: opacity 80ms ease-in-out;
 }
 

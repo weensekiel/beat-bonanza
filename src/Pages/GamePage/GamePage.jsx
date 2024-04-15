@@ -20,19 +20,19 @@ export function GamePage() {
         ArrowRight: document.querySelector(".lane.right")
     };
 
-    const scoreZones = {
-        ArrowUp: document.querySelector(".lane.up .score-zone"),
-        ArrowDown: document.querySelector(".lane.down .score-zone"),
-        ArrowLeft: document.querySelector(".lane.left .score-zone"),
-        ArrowRight: document.querySelector(".lane.right .score-zone")
-    };
+    // const scoreZones = {
+    //     ArrowUp: document.querySelector(".lane.up .score-zone"),
+    //     ArrowDown: document.querySelector(".lane.down .score-zone"),
+    //     ArrowLeft: document.querySelector(".lane.left .score-zone"),
+    //     ArrowRight: document.querySelector(".lane.right .score-zone")
+    // };
 
-    const sweetSpots = {
-        ArrowUp: document.querySelector(".lane.up .score-zone .sweet-spot"),
-        ArrowDown: document.querySelector(".lane.down .score-zone .sweet-spot"),
-        ArrowLeft: document.querySelector(".lane.left .score-zone .sweet-spot"),
-        ArrowRight: document.querySelector(".lane.right .score-zone .sweet-spot")
-    };
+    // const sweetSpots = {
+    //     ArrowUp: document.querySelector(".lane.up .score-zone .sweet-spot"),
+    //     ArrowDown: document.querySelector(".lane.down .score-zone .sweet-spot"),
+    //     ArrowLeft: document.querySelector(".lane.left .score-zone .sweet-spot"),
+    //     ArrowRight: document.querySelector(".lane.right .score-zone .sweet-spot")
+    // };
 
     useEffect(() => {
         let intervalId;
@@ -67,7 +67,7 @@ export function GamePage() {
     function startArrowsAnimation() {
         const lanes = gameContainerRef.current.querySelectorAll('.lane');
 
-        const numLanes = Math.random() > 0.5 ? 1 : 2;
+        const numLanes = Math.random() > 0.67 ? 1 : 2;
         const chosenLanes = getRandomLanes(numLanes, lanes);
 
         chosenLanes.forEach(lane => {
@@ -84,7 +84,7 @@ export function GamePage() {
                         stop();
                     }
                 }
-            }, 4500);
+            }, 3000);
         });
     }
 
@@ -177,7 +177,7 @@ export function GamePage() {
                 </div>
             </div>
 
-            <div ref={gameContainerRef} className="game__board--container" style={{ '--animation-speed': '4.5s' }}>
+            <div ref={gameContainerRef} className="game__board--container" style={{ '--animation-speed': '3s' }}>
                 <Lane direction="left" />
                 <Lane direction="down" />
                 <Lane direction="up" />
