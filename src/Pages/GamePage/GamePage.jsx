@@ -2,16 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import useSound from 'use-sound';
 import './GamePage.scss';
 import { Lane } from "../../Components/Lane/Lane";
-import song from "../../assets/BeethovenVirus.mp3";
+import song from "../../assets/BeethovenVirus.ogg";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export function GamePage() {
+export function GamePage({ user }) {
     const [score, setScore] = useState(0);
     const [lives, setLives] = useState(10);
-    const [multiplier, setMultiplier] = useState(1);
     const [isGameRunning, setIsGameRunning] = useState(false);
     const [finalScore, setFinalScore] = useState(0);
-    const [play, { stop }] = useSound(song);
+    const [play, { stop }] = useSound(song, { onend: handleSongEnd });
     const gameContainerRef = useRef(null);
+    const navigate = useNavigate();
 
     const lanes = {
         ArrowUp: document.querySelector(".lane.up"),
@@ -20,19 +22,18 @@ export function GamePage() {
         ArrowRight: document.querySelector(".lane.right")
     };
 
-    // const scoreZones = {
-    //     ArrowUp: document.querySelector(".lane.up .score-zone"),
-    //     ArrowDown: document.querySelector(".lane.down .score-zone"),
-    //     ArrowLeft: document.querySelector(".lane.left .score-zone"),
-    //     ArrowRight: document.querySelector(".lane.right .score-zone")
-    // };
-
-    // const sweetSpots = {
-    //     ArrowUp: document.querySelector(".lane.up .score-zone .sweet-spot"),
-    //     ArrowDown: document.querySelector(".lane.down .score-zone .sweet-spot"),
-    //     ArrowLeft: document.querySelector(".lane.left .score-zone .sweet-spot"),
-    //     ArrowRight: document.querySelector(".lane.right .score-zone .sweet-spot")
-    // };
+    async function postScore() {
+        try {
+            const response = await axios.post("http://localhost:8080/user/scores", {
+                userId: user.id,
+                score: score
+            });
+            console.log(response.data);
+            console.log(score);
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     useEffect(() => {
         let intervalId;
@@ -40,7 +41,7 @@ export function GamePage() {
         if (isGameRunning) {
             intervalId = setInterval(() => {
                 startArrowsAnimation();
-            }, 385);
+            }, 370);
             play();
         } else {
             stopArrowsAnimation();
@@ -67,7 +68,7 @@ export function GamePage() {
     function startArrowsAnimation() {
         const lanes = gameContainerRef.current.querySelectorAll('.lane');
 
-        const numLanes = Math.random() > 0.67 ? 1 : 2;
+        const numLanes = Math.random() < 0.75 ? 1 : 2;
         const chosenLanes = getRandomLanes(numLanes, lanes);
 
         chosenLanes.forEach(lane => {
@@ -84,7 +85,7 @@ export function GamePage() {
                         stop();
                     }
                 }
-            }, 3000);
+            }, 2000);
         });
     }
 
@@ -101,37 +102,50 @@ export function GamePage() {
     function handleStart() {
         setIsGameRunning(true);
         setScore(0);
-        setMultiplier(1);
     };
 
+    function handleSongEnd() {
+        setIsGameRunning(false);
+        stopArrowsAnimation();
+        setFinalScore(score);
+        postScore();
+    }
+
+    function handleBack() {
+        navigate(-1);
+    }
 
     function handleKeyDown(event) {
         if (!isGameRunning) return;
-
+    
         const lane = lanes[event.key];
-
+    
         if (lane) {
             const arrow = lane.querySelector(".arrow");
             if (arrow) {
                 const scoreZone = lane.querySelector(".score-zone");
-
+    
                 if (overlaps(arrow, scoreZone)) {
                     const sweetSpot = lane.querySelector(".sweet-spot");
                     if (overlaps(arrow, sweetSpot)) {
-                        setScore(prevScore => prevScore + 150); 
+                        setScore(prevScore => prevScore + 150);
                     } else {
                         setScore(prevScore => prevScore + 100);
                     }
                     lane.removeChild(arrow);
                 } else {
-                    setLives(prevLives => prevLives - 1);
-                    if (lives <= 0) {
-                        setIsGameRunning(false);
-                        stop();
-                        setFinalScore(score);
-                    }
+                    setLives(prevLives => {
+                        const newLives = prevLives - 1;
+                        if (newLives <= 0) {
+                            setIsGameRunning(false);
+                            stop();
+                            setFinalScore(score);
+                            postScore();
+                        }
+                        return newLives;
+                    });
                 }
-
+    
                 updateLivesAndScores();
             }
         }
@@ -152,12 +166,10 @@ export function GamePage() {
     function updateLivesAndScores() {
         const livesElement = document.querySelector(".game__totals .lives");
         const scoreElement = document.querySelector(".game__totals .score");
-        const multiplierElement = document.querySelector(".game__totals .multiplier");
 
-        if (livesElement && scoreElement && multiplierElement) {
+        if (livesElement && scoreElement) {
             livesElement.textContent = lives;
             scoreElement.textContent = score;
-            multiplierElement.textContent = multiplier;
         }
     };
 
@@ -171,13 +183,9 @@ export function GamePage() {
                 <div className='game__totals--score'>
                     Score: {score}
                 </div>
-
-                <div className='game__totals--multiplier'>
-                    Multiplier: {multiplier}x
-                </div>
             </div>
 
-            <div ref={gameContainerRef} className="game__board--container" style={{ '--animation-speed': '3s' }}>
+            <div ref={gameContainerRef} className="game__board--container" style={{ '--animation-speed': '2s' }}>
                 <Lane direction="left" />
                 <Lane direction="down" />
                 <Lane direction="up" />
@@ -190,6 +198,17 @@ export function GamePage() {
                     <button className="start" onClick={handleStart}>
                         Play!
                     </button>
+
+
+
+                    {/* MAKE THIS BUTTON GO BACK TO THE CORRECT DASHBOARD */}
+                    <button className="start" onClick={handleBack}>
+                        Back to Dashboard
+                    </button>
+                    {/* OA;DHIJLIAQUDHLIAUHDLIUAHDLIUAHDILUASHDUIH */}
+
+
+
                 </div>
             )}
         </div>

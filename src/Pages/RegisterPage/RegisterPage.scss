@@ -1,5 +1,5 @@
 .register {
-    color: #ee82ee;
+    color: #ff66d8;
 
     &__title {
         display: flex;
@@ -8,26 +8,26 @@
 
     &__form {
         display: flex;
-        justify-content: center;
         align-items: center;
         flex-direction: column;
         gap: 10px;
         margin: auto;
         width: 30%;
-        background-color: #ee82ee;
-        color: #014061;
+        background-color: #014061;
+        color: #ff66d8;
+        border-radius: 10px;
     }
 
     &__footer {
         display: flex;
         justify-content: center;
-        color: #ee82ee;
+        color: #ff66d8;
     }
 
     &__button {
         background-color: #014061;
-        color: #ee82ee;
-        border-radius: 4px;
+        color: #ff66d8;
+        border-radius: 10px;
         width: 100px;
         height: 30px;
     }

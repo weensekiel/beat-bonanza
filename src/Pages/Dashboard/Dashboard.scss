@@ -1,11 +1,36 @@
 .dashboard {
-    color: #ee82ee;
-    
+    color: #ff66d8;
+
+    &__header {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__score-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ee82ee;
+        border-radius: 10px;
+        width: 250px;
+        margin: auto;
+    }
+
     &__button {
         background-color: #014061;
-        color: #ee82ee;
-        border-radius: 4px;
+        color: #ff66d8;
+        border-radius: 10px;
         width: 100px;
         height: 30px;
+
+        &-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
     }
+
+    
 }

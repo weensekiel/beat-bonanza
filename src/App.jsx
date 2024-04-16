@@ -24,8 +24,6 @@ function App() {
     getUser();
   }, []);
 
-
-
   if (!user) {
     return <div>loading...</div>
   }
@@ -35,9 +33,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard/user/:id" element={<Dashboard />} />
+        <Route path="/dashboard/user/:id" element={<Dashboard user={user}/>} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/game" element={<GamePage />} />
+        <Route path="/game" element={<GamePage user={user} />} />
         <Route path="/results" element={<ResultsPage />} />
         <Route path="/leaderboards" element={<LeaderboardsPage />} />
       </Routes>

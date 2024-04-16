@@ -56,19 +56,19 @@
 
 
 .left .arrow {
-  background-color: #0fc0fc;
+  background-color: #ff66d8;
 }
 
 .up .arrow {
-  background-color: #7b1daf;
+  background-color: #f7ec59;
 }
 
 .down .arrow {
-  background-color: #ff2fb9;
+  background-color: #f8f7f9;
 }
 
 .right .arrow {
-  background-color: #d4ff47;
+  background-color: #92dce5;
 }
 
 .left .arrow:after {
@@ -85,8 +85,8 @@
 
 .score-zone {
   width: 100%;
-  aspect-ratio: 0.8;
-  background-color: #7b1daf;
+  aspect-ratio: 0.5;
+  background-color: rgba(0, 0, 0, 0.2);
   opacity: 0.5;
   display: flex;
   align-items: center;
@@ -101,7 +101,7 @@
 
 .sweet-spot {
   width: 100%;
-  aspect-ratio: 1.5;
+  aspect-ratio: 1;
   background-color: #d4ff47;
 }
 
