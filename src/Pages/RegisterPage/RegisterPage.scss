@@ -1,9 +1,12 @@
+@use "../../styles/typography.scss";
+
 .register {
     color: #ff66d8;
 
     &__title {
         display: flex;
         justify-content: center;
+        font-family: Orbitron;
     }
 
     &__form {

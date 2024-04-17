@@ -1,9 +1,12 @@
+@use "../../styles/typography.scss";
+
 .dashboard {
     color: #ff66d8;
 
     &__header {
         display: flex;
         justify-content: center;
+        font-family: Orbitron;
     }
 
     &__score-container {
