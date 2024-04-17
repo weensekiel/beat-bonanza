@@ -74,7 +74,7 @@ export function Dashboard() {
             </div>
 
             <div className="dashboard__button-container">
-                <button onClick={handlePlay} className="dashboard__button">play</button>
+                <button onClick={handlePlay} className="dashboard__button">Play 🎵</button>
                 <button onClick={handleLogout} className="dashboard__button">Logout</button>
             </div>
         </main>
