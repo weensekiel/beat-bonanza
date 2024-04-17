@@ -3,7 +3,6 @@ import './App.scss'
 import { LoginPage } from './Pages/LoginPage/LoginPage';
 import { RegisterPage } from './Pages/RegisterPage/RegisterPage';
 import { GamePage } from './Pages/GamePage/GamePage';
-import { ResultsPage } from './Pages/ResultsPage/ResultsPage';
 import { LeaderboardsPage } from './Pages/LeaderboardsPage/LeaderboardsPage';
 import { Dashboard } from './Pages/Dashboard/Dashboard';
 import { useEffect, useState } from 'react';
@@ -36,7 +35,6 @@ function App() {
         <Route path="/dashboard/user/:id" element={<Dashboard user={user}/>} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/game" element={<GamePage user={user} />} />
-        <Route path="/results" element={<ResultsPage />} />
         <Route path="/leaderboards" element={<LeaderboardsPage />} />
       </Routes>
     </BrowserRouter>
