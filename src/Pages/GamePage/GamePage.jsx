@@ -29,11 +29,13 @@ export function GamePage({ user }) {
                 score: score
             });
             console.log(response.data);
-            console.log(score);
         } catch (e) {
             console.error(e);
         }
     };
+
+    console.log(finalScore);
+    console.log(score);
 
     useEffect(() => {
         let intervalId;
@@ -41,7 +43,8 @@ export function GamePage({ user }) {
         if (isGameRunning) {
             intervalId = setInterval(() => {
                 startArrowsAnimation();
-            }, 370);
+            }, 740.7407407407408);
+            // }, 370.3703703703704); 
             play();
         } else {
             stopArrowsAnimation();
@@ -61,9 +64,16 @@ export function GamePage({ user }) {
         if (lives === 0) {
             setIsGameRunning(false);
             stopArrowsAnimation();
+            setFinalScore(score);
             stop();
         }
-    }, [lives, stop]);
+    }, [lives, stop, stopArrowsAnimation]);
+
+    useEffect(() => {
+        if (!isGameRunning && lives === 0) {
+            postScore();
+        }
+    }, [isGameRunning, lives, score]);
 
     function startArrowsAnimation() {
         const lanes = gameContainerRef.current.querySelectorAll('.lane');
@@ -82,7 +92,8 @@ export function GamePage({ user }) {
                     setLives(prevLives => prevLives - 1);
                     if (lives <= 0) {
                         setIsGameRunning(false);
-                        stop();
+                        stopArrowsAnimation();
+                        setFinalScore(score);
                     }
                 }
             }, 2000);
@@ -106,8 +117,8 @@ export function GamePage({ user }) {
 
     function handleSongEnd() {
         setIsGameRunning(false);
-        stopArrowsAnimation();
         setFinalScore(score);
+        stopArrowsAnimation();
         postScore();
     }
 
@@ -117,20 +128,22 @@ export function GamePage({ user }) {
 
     function handleKeyDown(event) {
         if (!isGameRunning) return;
-    
+
         const lane = lanes[event.key];
-    
+
         if (lane) {
             const arrow = lane.querySelector(".arrow");
             if (arrow) {
                 const scoreZone = lane.querySelector(".score-zone");
-    
+
                 if (overlaps(arrow, scoreZone)) {
                     const sweetSpot = lane.querySelector(".sweet-spot");
                     if (overlaps(arrow, sweetSpot)) {
                         setScore(prevScore => prevScore + 150);
+                        setFinalScore(prevScore => prevScore + 150);
                     } else {
                         setScore(prevScore => prevScore + 100);
+                        setFinalScore(prevScore => prevScore + 100);
                     }
                     lane.removeChild(arrow);
                 } else {
@@ -140,13 +153,10 @@ export function GamePage({ user }) {
                             setIsGameRunning(false);
                             stop();
                             setFinalScore(score);
-                            postScore();
                         }
                         return newLives;
                     });
                 }
-    
-                updateLivesAndScores();
             }
         }
     };
@@ -163,18 +173,8 @@ export function GamePage({ user }) {
         );
     };
 
-    function updateLivesAndScores() {
-        const livesElement = document.querySelector(".game__totals .lives");
-        const scoreElement = document.querySelector(".game__totals .score");
-
-        if (livesElement && scoreElement) {
-            livesElement.textContent = lives;
-            scoreElement.textContent = score;
-        }
-    };
-
     return (
-        <div>
+        <main>
             <div className='game__totals'>
                 <div className='game__totals--lives'>
                     Lives: {lives}
@@ -199,18 +199,11 @@ export function GamePage({ user }) {
                         Play!
                     </button>
 
-
-
-                    {/* MAKE THIS BUTTON GO BACK TO THE CORRECT DASHBOARD */}
                     <button className="start" onClick={handleBack}>
                         Back to Dashboard
                     </button>
-                    {/* OA;DHIJLIAQUDHLIAUHDLIUAHDLIUAHDILUASHDUIH */}
-
-
-
                 </div>
             )}
-        </div>
+        </main>
     );
 };

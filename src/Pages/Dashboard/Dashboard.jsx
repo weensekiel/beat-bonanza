@@ -1,6 +1,7 @@
 import "./Dashboard.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import cat from "../../assets/cat.jpg";
 import axios from "axios";
 
 export function Dashboard() {
@@ -54,7 +55,10 @@ export function Dashboard() {
 
     return (
         <main className="dashboard">
-            <h1 className="dashboard__header">Hello, {user.username}!</h1>
+            <div className="dashboard__user-info">
+                <h1 className="dashboard__header">Hello, {user.username}!</h1>
+                <img src={cat} alt="profile photo" className="dashboard__photo" />
+            </div>
 
             <div className="dashboard__score-container">
                 <p>Song: Beethoven Virus</p>
@@ -74,7 +78,7 @@ export function Dashboard() {
             </div>
 
             <div className="dashboard__button-container">
-                <button onClick={handlePlay} className="dashboard__button">Play 🎵</button>
+                <button onClick={handlePlay} className="dashboard__button">play</button>
                 <button onClick={handleLogout} className="dashboard__button">Logout</button>
             </div>
         </main>

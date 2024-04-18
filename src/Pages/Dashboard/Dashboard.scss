@@ -3,10 +3,20 @@
 .dashboard {
     color: #ff66d8;
 
+    &__user-info {
+        display: flex;
+        justify-content: center;
+    }
+
     &__header {
         display: flex;
         justify-content: center;
         font-family: Orbitron;
+    }
+
+    &__photo {
+        width: 100px;
+        border-radius: 100px;
     }
 
     &__score-container {
@@ -35,5 +45,5 @@
         }
     }
 
-    
+
 }
