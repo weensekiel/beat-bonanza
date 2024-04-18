@@ -1,3 +1,5 @@
+@use "../../styles/typography.scss";
+
 .game {
   &__totals {
     display: flex;
@@ -124,6 +126,7 @@
   margin: 0;
   font-weight: bold;
   color: #ff2fb9;
+
 }
 
 .modal button {
@@ -140,4 +143,11 @@
 
 .modal.hidden {
   display: none;
+}
+
+.start {
+  font-family: Bicubik, Tahoma, sans-serif;
+}
+.back {
+  font-family: Bicubik, Tahoma, sans-serif;
 }

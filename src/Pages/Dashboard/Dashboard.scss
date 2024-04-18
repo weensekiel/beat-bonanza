@@ -6,12 +6,12 @@
     &__user-info {
         display: flex;
         justify-content: center;
+        gap: 20px;
     }
 
     &__header {
         display: flex;
         justify-content: center;
-        font-family: Orbitron;
     }
 
     &__photo {
@@ -36,6 +36,7 @@
         border-radius: 10px;
         width: 100px;
         height: 30px;
+        font-family: Bicubik, Tahoma, sans-serif;
 
         &-container {
             display: flex;

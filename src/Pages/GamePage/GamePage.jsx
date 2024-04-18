@@ -199,7 +199,7 @@ export function GamePage({ user }) {
                         Play!
                     </button>
 
-                    <button className="start" onClick={handleBack}>
+                    <button className="back" onClick={handleBack}>
                         Back to Dashboard
                     </button>
                 </div>

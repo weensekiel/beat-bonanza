@@ -6,7 +6,6 @@
     &__title {
         display: flex;
         justify-content: center;
-        font-family: Orbitron;
     }
 
     &__form {
@@ -33,6 +32,8 @@
         border-radius: 10px;
         width: 100px;
         height: 30px;
+        font-family: Bicubik, Tahoma, sans-serif;
+
     }
 
     &__error {
