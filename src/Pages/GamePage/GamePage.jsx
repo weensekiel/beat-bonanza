@@ -34,17 +34,14 @@ export function GamePage({ user }) {
         }
     };
 
-    console.log(finalScore);
-    console.log(score);
-
     useEffect(() => {
         let intervalId;
 
         if (isGameRunning) {
             intervalId = setInterval(() => {
                 startArrowsAnimation();
-            }, 740.7407407407408);
-            // }, 370.3703703703704); 
+            }, 740.7407407407408);  // slower
+            // }, 370.3703703703704); // faster
             play();
         } else {
             stopArrowsAnimation();
@@ -119,7 +116,7 @@ export function GamePage({ user }) {
         setIsGameRunning(false);
         setFinalScore(score);
         stopArrowsAnimation();
-        postScore();
+        setLives(0);
     }
 
     function handleBack() {
